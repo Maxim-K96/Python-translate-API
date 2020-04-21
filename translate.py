@@ -6,11 +6,12 @@ import requests
 import simplejson as json
 
 class Translate:
-    def __init__(self, lang, doc): # Вставить проверку наличия аргументов
+    def __init__(self, lang, doc): 
         self.langvige = lang,
         self.doc = doc,
         self.user_agent = {'User-Agent': '<Your User-Agent>'}
-    def translate_handler(self, word): 
+    def translate_handler(self):
+        for i in self.doc: word = i
         word = ' '.join(word)
         self.langvige = ' '.join(self.langvige)
         try:
@@ -22,7 +23,7 @@ class Translate:
                 print('Available languages: en, ru')
                 return
         except requests.HTTPError as err:  # Исправить
-            print ('http error') #(str(e))
+            print ('http error') 
             print('Response is: {content}'.format(content=err))
         req.json()
         if req.status_code != 200: 
@@ -32,17 +33,10 @@ class Translate:
             print(' '.join(translate_value['text']))
         else: 
             print('unknow error >_<')
-    def conversion(self):
-        numder = len(self.doc)
-        for i in self.doc: number = i
-        return number
-
-    
-         
 
 def main():
 	translate = Translate(sys.argv[1], sys.argv[2:]) # Передача нескольких аргументов
-	translate.translate_handler(translate.conversion())
+	translate.translate_handler()
 
 
 if __name__== "__main__":
